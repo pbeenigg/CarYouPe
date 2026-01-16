@@ -1,6 +1,21 @@
-
-
-#Ignore vscode AI rules
-.github/instructions/codacy.instructions.md
-
+# General
 .DS_Store
+Thumbs.db
+*.log
+tmp/
+temp/
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Trae/AI
+.trae/
+
+# Local Env
+.env
+.env.*
+!.env.example
+.github/instructions/codacy.instructions.md

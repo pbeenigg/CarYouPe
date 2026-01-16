@@ -1,0 +1,36 @@
+{
+  "Common": {
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save",
+    "search": "Search",
+    "reset": "Reset",
+    "loading": "Loading...",
+    "success": "Operation Successful",
+    "error": "Operation Failed"
+  },
+  "Auth": {
+    "loginTitle": "Login to CarYouPe Admin",
+    "username": "Username",
+    "password": "Password",
+    "loginBtn": "Login",
+    "logout": "Logout"
+  },
+  "Dashboard": {
+    "title": "Dashboard",
+    "totalSales": "Total Sales",
+    "totalOrders": "Total Orders",
+    "newUsers": "New Users"
+  },
+  "Menu": {
+    "dashboard": "Dashboard",
+    "users": "User Management",
+    "products": "Product Management",
+    "orders": "Order Management",
+    "finance": "Finance",
+    "settings": "Settings"
+  }
+}
