@@ -2,6 +2,14 @@
 
 本文档旨在统一 **CarYouPe** 项目的开发规范，确保代码风格一致、易于维护和协作。
 
+## 0. 开发策略与顺序 (Strategy & Priority)
+
+本项目遵循 **“管理后台优先 (Admin First)”** 的开发策略：
+
+1.  **优先完成管理后台与后端核心**: 确保数据模型、业务逻辑和管理功能（CRUD）在后端和管理后台（Frontend Admin）闭环。
+2.  **后置小程序开发**: 在后端 API 稳定且管理后台可操作数据后，再进行小程序端（UniApp）的 UI 开发和接口对接。
+3.  **全栈闭环**: 任何新功能的开发，应按照 `Backend API` -> `Admin UI` -> `Client API` -> `Mini-Program UI` 的顺序进行。
+
 ## 1. 通用规范 (General)
 
 ### 1.1 Git 提交规范 (Conventional Commits)
@@ -26,6 +34,42 @@
 - `feat/xxx`: 功能分支，从 dev 切出。
 - `fix/xxx`: 修复分支。
 
+### 1.3 注释规范 (Documentation)
+
+为了降低维护成本和沟通障碍，**所有业务代码必须包含清晰的中文注释**。
+
+- **原则**: 注释应解释“为什么这样做”以及“业务背景”，而不仅仅是翻译代码。
+- **强制要求**:
+  - **类/模块 (Class/Module)**: 必须包含 Docstring，说明该模块的业务职责。
+  - **方法/函数 (Function)**: 必须说明功能、参数 (`Args`)、返回值 (`Returns`) 以及可能的异常 (`Raises`)。
+  - **关键字段 (Field)**: 数据模型 (Model/Schema) 中的字段必须有注释说明含义，特别是状态码 (Status Code) 的枚举值。
+  - **复杂逻辑**: 对于复杂的算法或业务判断流程，必须在代码块上方添加逻辑说明。
+- **示例 (Python)**:
+
+  ```python
+  class OrderService:
+      """
+      订单服务类
+      处理订单创建、支付状态流转及分佣计算
+      """
+
+      def calculate_commission(self, order_amount: float, user_level: int) -> float:
+          """
+          计算分销佣金
+
+          Args:
+              order_amount: 订单实际支付金额
+              user_level: 用户VIP等级 (1: SVIP, 2: VIP)
+
+          Returns:
+              float: 计算后的佣金金额
+          """
+          # SVIP 享受 30% 首单返佣策略
+          if user_level == 1:
+              return order_amount * 0.3
+          return 0
+  ```
+
 ---
 
 ## 2. 后端开发规范 (Backend - FastAPI)
@@ -45,29 +89,34 @@
 
 ### 2.3 项目结构
 
-为了清晰区分**后台管理端**与**小程序端**的业务逻辑，API 层级应进行明确拆分：
+为了清晰区分**后台管理端**与**小程序端**的业务逻辑，同时保持 FastAPI 的分层架构，API 层级应进行明确拆分：
 
-```
+```text
 backend/app/
-├── api/
-│   └── api_v1/
-│       ├── api.py          # 路由汇总
-│       └── endpoints/
-│           ├── admin/      # 管理后台专用接口 (需要管理员权限)
-│           │   ├── users.py
-│           │   └── products.py
-│           ├── client/     # 小程序/用户端专用接口 (需要会员权限)
-│           │   ├── auth.py
-│           │   └── home.py
-│           └── common/     # 公共接口 (如文件上传、回调)
-├── core/                   # 核心配置
-├── db/                     # 数据库
-├── models/                 # ORM 模型
-├── schemas/                # Pydantic Schemas
-│   ├── admin/              # 管理端专用 Schema (如 UserCreateAdmin)
-│   ├── client/             # 客户端专用 Schema (如 UserProfile)
-│   └── common/             # 通用 Schema
-└── services/               # 业务逻辑层
+├── api/             # API 接口层
+│   ├── api_v1/      # V1 版本接口路由
+│   └── deps.py      # [新增] 依赖注入 (数据库Session, 当前用户验证)
+├── core/            # 核心配置
+│   ├── config.py    # 环境配置 (Env vars)
+│   └── security.py  # 安全相关 (JWT, 密码哈希)
+├── crud/            # [新增] 数据库操作层 (CRUD)
+│   ├── base.py      # 通用 CRUD 基类
+│   ├── crud_user.py # 用户相关操作
+│   └── ...
+├── db/              # 数据库连接与初始化
+│   ├── base.py      # [新增] 模型统一导入 (用于 Alembic/Init)
+│   ├── init_db.py   # [新增] 业务数据初始化逻辑
+│   └── session.py   # [新增] 数据库 Session 工厂
+├── models/          # SQLAlchemy ORM 模型
+│   ├── user.py      # [更新] 用户模型
+│   ├── role.py      # 角色与权限
+│   ├── menu.py      # 菜单配置
+│   └── ...
+├── schemas/         # Pydantic 数据验证模型 (DTO)
+│   ├── user.py      # 用户 Schema (Create/Update/Response)
+│   └── ...
+├── initial_data.py  # [新增] 初始化脚本入口 (python -m app.initial_data)
+└── main.py          # 应用入口 (FastAPI app)
 ```
 
 ### 2.4 最佳实践

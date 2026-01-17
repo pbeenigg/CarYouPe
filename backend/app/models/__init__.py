@@ -4,3 +4,5 @@ from .product import Product, ProductSKU, ProductCarCompatibility, Category
 from .car import CarBrand, CarSeries, CarModel
 from .distribution import DistributionRelation, CommissionRecord
 from .wallet import Wallet, WalletTransaction
+from .menu import Menu
+from .order import Order, OrderItem

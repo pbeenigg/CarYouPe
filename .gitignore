@@ -19,3 +19,4 @@ temp/
 .env.*
 !.env.example
 .github/instructions/codacy.instructions.md
+.codacy/
