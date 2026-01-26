@@ -1,0 +1,181 @@
+{
+  "brand": {
+    "name": "汽车用品之家",
+    "nameEn": "CarYou Pe",
+    "slogan": "一键匹配爱车的每个细节",
+    "logo": "/images/logo.svg"
+  },
+  "navigation": [
+    { "label": "首页", "href": "#home" },
+    { "label": "产品", "href": "#products" },
+    { "label": "效果", "href": "#showcase" },
+    { "label": "关于我们", "href": "#about" }
+  ],
+  "hero": {
+    "title": "CarYou Pe",
+    "subtitle": "一键匹配爱车的每个细节",
+    "backgroundImage": "/images/home/banner2.png",  
+    "ctaText": "了解产品",
+    "ctaHref": "#products"
+  },
+  "features": [
+    {
+      "icon": "shield-check",
+      "title": "品质保障",
+      "description": "严格质检品控制度，规范操作规程，保质保量生产服务意识，为消费者提供安全放心产品"
+    },
+    {
+      "icon": "factory",
+      "title": "生产实力",
+      "description": "7000平米标准化生产车间，国内先进水平生产流水线，100多名优秀员工团队"
+    },
+    {
+      "icon": "sparkles",
+      "title": "环保材料",
+      "description": "采用安全环保的原材料，注重全过程管控，从原材料检验到成品检验层层把关"
+    },
+    {
+      "icon": "award",
+      "title": "专业团队",
+      "description": "经验丰富的老牌汽车用品加工厂师傅团队管理，技术改造和新工艺应用持续创新"
+    }
+  ],
+  "products": [
+    {
+      "id": "floor-mat-1",
+      "name": "全包围皮革脚垫",
+      "category": "脚垫系列",
+      "image": "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=600&q=80",
+      "description": "高档头层牛皮，完美贴合车型，防水防污易清洁",
+      "features": [
+        "头层牛皮材质",
+        "立体裁剪全包围",
+        "防水防污耐磨",
+        "精准车型匹配"
+      ]
+    },
+    {
+      "id": "seat-cover-1",
+      "name": "四季通用座套",
+      "category": "座套系列",
+      "image": "https://images.unsplash.com/photo-1493238792000-8113da705763?w=600&q=80",
+      "description": "透气舒适，四季适用，多种颜色可选",
+      "features": [
+        "透气面料舒适",
+        "四季通用设计",
+        "多色可选",
+        "安装简便快捷"
+      ]
+    },
+    {
+      "id": "seat-cushion-1",
+      "name": "记忆棉座垫",
+      "category": "座垫系列",
+      "image": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=80",
+      "description": "记忆棉填充，缓解驾驶疲劳，提升乘坐舒适度",
+      "features": [
+        "记忆棉填充",
+        "人体工学设计",
+        "缓解驾驶疲劳",
+        "透气防滑底层"
+      ]
+    },
+    {
+      "id": "trunk-mat-1",
+      "name": "后备箱垫",
+      "category": "脚垫系列",
+      "image": "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=600&q=80",
+      "description": "专车专用，防水防污，保护后备箱清洁",
+      "features": [
+        "专车专用定制",
+        "防水防污材质",
+        "易拆卸清洗",
+        "加厚耐磨设计"
+      ]
+    },
+    {
+      "id": "steering-wheel-1",
+      "name": "真皮方向盘套",
+      "category": "内饰系列",
+      "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=600&q=80",
+      "description": "真皮材质，手感舒适，防滑耐磨",
+      "features": [
+        "真皮手工缝制",
+        "防滑透气",
+        "提升驾控感",
+        "四季适用"
+      ]
+    },
+    {
+      "id": "armrest-box-1",
+      "name": "中央扶手箱垫",
+      "category": "内饰系列",
+      "image": "https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=600&q=80",
+      "description": "柔软舒适，保护扶手箱，提升内饰档次",
+      "features": [
+        "柔软舒适填充",
+        "精准贴合设计",
+        "提升内饰质感",
+        "易安装拆卸"
+      ]
+    }
+  ],
+  "showcase": [
+    {
+      "id": "showcase-1",
+      "image": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80",
+      "caption": "全包围脚垫实装效果",
+      "alt": "汽车脚垫安装效果展示"
+    },
+    {
+      "id": "showcase-2",
+      "image": "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&q=80",
+      "caption": "豪华座套实装效果",
+      "alt": "汽车座套安装效果展示"
+    },
+    {
+      "id": "showcase-3",
+      "image": "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&q=80",
+      "caption": "内饰整体改装效果",
+      "alt": "汽车内饰改装完整效果"
+    },
+    {
+      "id": "showcase-4",
+      "image": "https://images.unsplash.com/photo-1617469767053-d3b523a0b982?w=800&q=80",
+      "caption": "高端定制皮革内饰",
+      "alt": "高端汽车内饰定制展示"
+    }
+  ],
+  "about": {
+    "company": "广州引领者汽车用品有限公司",
+    "foundedYear": 2020,
+    "description": "广州引领者汽车用品有限公司成立于2020年，是一家专业从事汽车脚垫、座垫、座套等皮革制品原材料及成品生产销售的企业。公司自成立以来，秉承生产安全、环保、品质、服务至上的理念，在市场竞争日益激烈的条件下，走出了一条有自身特色的发展之路。",
+    "highlights": [
+      "7000平米标准化生产车间",
+      "国内先进水平的生产流水线及配套设施",
+      "100多名优秀员工和经验丰富的师傅团队",
+      "严格质检品控制度和规范操作规程",
+      "重视技术改造和新工艺应用",
+      "全过程质量管控体系"
+    ],
+    "stats": [
+      { "label": "生产车间", "value": "7000", "unit": "㎡" },
+      { "label": "员工团队", "value": "100", "unit": "+" },
+      { "label": "成立年份", "value": "2020", "unit": "年" },
+      { "label": "服务客户", "value": "1000", "unit": "+" }
+    ]
+  },
+  "contact": {
+    "title": "开启合作之旅",
+    "subtitle": "专业团队为您提供一站式汽车用品解决方案",
+    "submitText": "立即提交"
+  },
+  "footer": {
+    "copyright": "© 2024 广州引领者汽车用品有限公司 版权所有",
+    "socialLinks": [
+      { "platform": "微信", "icon": "message-circle", "url": "tel:18122288671" },
+      { "platform": "电话", "icon": "phone", "url": "tel:18122288671" },
+      { "platform": "邮箱", "icon": "mail", "url": "mailto:caryoup@163.com" }
+    ]
+  }
+}
