@@ -74,7 +74,7 @@ export class EmailTemplates {
             </div>
             
             <center>
-                <a href="https://caryoupe.com" class="btn">访问我们的网站</a>
+                <a href="https://www.caryoupe.top" class="btn">访问我们的网站</a>
             </center>
         </div>
         
@@ -253,7 +253,6 @@ CarYouPe 专业车配服务
             <center style="margin: 20px 0;">
                 <a href="mailto:${data.email}" class="btn">📧 回复客户</a>
                 <a href="tel:${data.phone}" class="btn">📱 电话联系</a>
-                <a href="https://caryoupe.com/admin" class="btn">🔧 管理后台</a>
             </center>
         </div>
         
