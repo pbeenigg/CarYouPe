@@ -1,12 +1,16 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { FadeInView } from '@/components/animations/FadeInView';
+import { DetailModal } from '@/components/ui/DetailModal';
 import { siteConfig } from '@/lib/data';
+import type { ShowcaseItem } from '@/lib/types';
 
 export function ShowcaseSection() {
   const { showcase } = siteConfig;
+  const [activeShowcase, setActiveShowcase] = useState<ShowcaseItem | null>(null);
 
   return (
     <section id="showcase" className="bg-space-black-light py-20 sm:py-24 lg:py-32">
@@ -27,6 +31,7 @@ export function ShowcaseSection() {
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
                 className="group relative overflow-hidden rounded-2xl cursor-pointer shadow-card hover:shadow-card-hover"
+                onClick={() => setActiveShowcase(item)}
               >
                 <div className="relative h-80 sm:h-96">
                   <Image
@@ -46,12 +51,33 @@ export function ShowcaseSection() {
                   <h3 className="text-xl font-semibold text-text-primary group-hover:text-accent transition-colors duration-300">
                     {item.caption}
                   </h3>
+                  <motion.button
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="mt-3 inline-flex items-center justify-center rounded-full border border-white/70 px-4 py-1.5 text-sm text-white/90 backdrop-blur hover:border-accent hover:text-accent"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveShowcase(item);
+                    }}
+                  >
+                    查看详情
+                  </motion.button>
                 </motion.div>
               </motion.div>
             </FadeInView>
           ))}
         </div>
       </div>
+
+      <DetailModal
+        open={!!activeShowcase}
+        onClose={() => setActiveShowcase(null)}
+        title={activeShowcase?.caption || ''}
+        image={activeShowcase?.image}
+        images={activeShowcase?.images}
+        subtitle={activeShowcase?.alt}
+        badge="实装案例"
+      />
     </section>
   );
 }

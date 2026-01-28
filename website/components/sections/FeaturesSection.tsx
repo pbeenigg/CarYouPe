@@ -1,6 +1,7 @@
 'use client';
 
 import { ShieldCheck, Factory, Sparkles, Award, LucideIcon } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { FadeInView } from '@/components/animations/FadeInView';
 import { siteConfig } from '@/lib/data';
 
@@ -31,18 +32,34 @@ export function FeaturesSection() {
             const IconComponent = iconMap[feature.icon] || Award;
             return (
               <FadeInView key={index} delay={index * 0.1}>
-                <div className="glass-card p-8 rounded-2xl hover-lift group h-full flex flex-col items-center">
-                  <div className="flex justify-center mb-6">
-                    <div className="w-16 h-16 rounded-full bg-gradient-orange flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <IconComponent className="w-8 h-8 text-white" />
+                <div className="glass-card p-8 rounded-2xl hover-lift group h-full flex flex-col items-center relative overflow-hidden">
+                  <motion.div
+                    className="pointer-events-none absolute -top-12 -right-12 h-32 w-32 rounded-full bg-accent/20 blur-2xl"
+                    animate={{ scale: [0.95, 1.08, 0.95], opacity: [0.2, 0.45, 0.2] }}
+                    transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+                  />
+                  <motion.div
+                    className="pointer-events-none absolute -bottom-12 -left-12 h-32 w-32 rounded-full bg-orange-400/20 blur-2xl"
+                    animate={{ scale: [0.9, 1.1, 0.9], opacity: [0.15, 0.4, 0.15] }}
+                    transition={{ duration: 5.2, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
+                  />
+                  <div className="relative z-10 flex flex-col items-center">
+                    <div className="flex justify-center mb-6">
+                      <motion.div
+                        className="w-16 h-16 rounded-full bg-gradient-orange flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
+                        animate={{ y: [0, -6, 0] }}
+                        transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut', delay: index * 0.2 }}
+                      >
+                        <IconComponent className="w-8 h-8 text-white" />
+                      </motion.div>
                     </div>
+                    <h3 className="text-xl font-semibold text-text-primary mb-3 text-center min-h-[1.5rem]">
+                      {feature.title}
+                    </h3>
+                    <p className="text-text-secondary text-center leading-relaxed min-h-[4.5rem]">
+                      {feature.description}
+                    </p>
                   </div>
-                  <h3 className="text-xl font-semibold text-text-primary mb-3 text-center min-h-[1.5rem]">
-                    {feature.title}
-                  </h3>
-                  <p className="text-text-secondary text-center leading-relaxed min-h-[4.5rem]">
-                    {feature.description}
-                  </p>
                 </div>
               </FadeInView>
             );

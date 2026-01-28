@@ -3,7 +3,7 @@
     "name": "汽车用品之家",
     "nameEn": "CarYou Pe",
     "slogan": "一键匹配爱车的每个细节",
-    "logo": "/images/logo.svg"
+    "logo": "/images/logo-white.png"
   },
   "navigation": [
     { "label": "首页", "href": "#home" },
@@ -46,6 +46,14 @@
       "name": "全包围皮革脚垫",
       "category": "脚垫系列",
       "image": "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=600&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1489824904134-891ab64532f1?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80"
+      ],
       "description": "高档头层牛皮，完美贴合车型，防水防污易清洁",
       "features": [
         "头层牛皮材质",
@@ -59,6 +67,14 @@
       "name": "四季通用座套",
       "category": "座套系列",
       "image": "https://images.unsplash.com/photo-1493238792000-8113da705763?w=600&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1200&q=80"
+      ],
       "description": "透气舒适，四季适用，多种颜色可选",
       "features": [
         "透气面料舒适",
@@ -72,6 +88,14 @@
       "name": "记忆棉座垫",
       "category": "座垫系列",
       "image": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1609521263047-f8f205293f24?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1517520287167-4bbf64a00d66?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
+      ],
       "description": "记忆棉填充，缓解驾驶疲劳，提升乘坐舒适度",
       "features": [
         "记忆棉填充",
@@ -85,6 +109,14 @@
       "name": "后备箱垫",
       "category": "脚垫系列",
       "image": "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=600&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1489824904134-891ab64532f1?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1200&q=80"
+      ],
       "description": "专车专用，防水防污，保护后备箱清洁",
       "features": [
         "专车专用定制",
@@ -98,6 +130,14 @@
       "name": "真皮方向盘套",
       "category": "内饰系列",
       "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=600&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80"
+      ],
       "description": "真皮材质，手感舒适，防滑耐磨",
       "features": [
         "真皮手工缝制",
@@ -111,6 +151,14 @@
       "name": "中央扶手箱垫",
       "category": "内饰系列",
       "image": "https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=600&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1609521263047-f8f205293f24?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1517520287167-4bbf64a00d66?auto=format&fit=crop&w=1200&q=80"
+      ],
       "description": "柔软舒适，保护扶手箱，提升内饰档次",
       "features": [
         "柔软舒适填充",
@@ -124,24 +172,48 @@
     {
       "id": "showcase-1",
       "image": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=80",
+        "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=1400&q=80",
+        "https://images.unsplash.com/photo-1489824904134-891ab64532f1?auto=format&fit=crop&w=1400&q=80",
+        "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1400&q=80"
+      ],
       "caption": "全包围脚垫实装效果",
       "alt": "汽车脚垫安装效果展示"
     },
     {
       "id": "showcase-2",
       "image": "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1400&q=80",
+        "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1400&q=80",
+        "https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&w=1400&q=80",
+        "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1400&q=80"
+      ],
       "caption": "豪华座套实装效果",
       "alt": "汽车座套安装效果展示"
     },
     {
       "id": "showcase-3",
       "image": "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=1400&q=80",
+        "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1400&q=80",
+        "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1400&q=80",
+        "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1400&q=80"
+      ],
       "caption": "内饰整体改装效果",
       "alt": "汽车内饰改装完整效果"
     },
     {
       "id": "showcase-4",
       "image": "https://images.unsplash.com/photo-1617469767053-d3b523a0b982?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1617469767053-d3b523a0b982?auto=format&fit=crop&w=1400&q=80",
+        "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80",
+        "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1400&q=80",
+        "https://images.unsplash.com/photo-1517520287167-4bbf64a00d66?auto=format&fit=crop&w=1400&q=80"
+      ],
       "caption": "高端定制皮革内饰",
       "alt": "高端汽车内饰定制展示"
     }

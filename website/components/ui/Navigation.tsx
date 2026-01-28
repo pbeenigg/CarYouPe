@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import Image from 'next/image';
 import { siteConfig } from '@/lib/data';
 
 export function Navigation() {
@@ -43,9 +44,16 @@ export function Navigation() {
           >
             <button
               onClick={() => handleNavClick('#home')}
-              className="text-2xl font-bold gradient-text hover:scale-105 transition-transform"
+              className="flex items-center hover:scale-105 transition-transform"
             >
-              {brand.nameEn}
+              <Image
+                src={brand.logo}
+                alt={`${brand.name} logo`}
+                width={96}
+                height={96}
+                className="rounded"
+                priority
+              />
             </button>
           </motion.div>
 

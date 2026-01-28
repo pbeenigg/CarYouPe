@@ -156,6 +156,6 @@ npm run lint
 
 ## 联系方式
 
-- 官网: [CarYou Pe](https://caryoupe.com)
-- 邮箱: info@caryoupe.com
+- 官网: [CarYou Pe](https://www.caryoupe.top)
+- 邮箱: caryoup@163.com
 - 电话: 400-xxx-xxxx

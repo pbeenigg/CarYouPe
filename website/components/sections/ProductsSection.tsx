@@ -1,13 +1,17 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import Image from 'next/image';
 import { FadeInView } from '@/components/animations/FadeInView';
+import { DetailModal } from '@/components/ui/DetailModal';
 import { siteConfig } from '@/lib/data';
+import type { Product } from '@/lib/types';
 
 export function ProductsSection() {
   const { products } = siteConfig;
+  const [activeProduct, setActiveProduct] = useState<Product | null>(null);
 
   return (
     <section id="products" className="bg-space-black py-20 sm:py-24 lg:py-32">
@@ -69,6 +73,7 @@ export function ProductsSection() {
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
+                    onClick={() => setActiveProduct(product)}
                     className="w-full mt-6 px-4 py-2 border border-accent text-accent rounded-lg font-semibold transition-all duration-300 hover:bg-accent hover:text-white"
                   >
                     查看详情
@@ -79,6 +84,18 @@ export function ProductsSection() {
           ))}
         </div>
       </div>
+
+      <DetailModal
+        open={!!activeProduct}
+        onClose={() => setActiveProduct(null)}
+        title={activeProduct?.name || ''}
+        image={activeProduct?.image}
+        images={activeProduct?.images}
+        subtitle={activeProduct?.category}
+        description={activeProduct?.description}
+        features={activeProduct?.features}
+        badge="明星产品"
+      />
     </section>
   );
 }

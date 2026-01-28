@@ -29,6 +29,7 @@ export interface Product {
   name: string;
   category: string;
   image: string;
+  images?: string[];
   features: string[];
   description: string;
 }
@@ -36,6 +37,7 @@ export interface Product {
 export interface ShowcaseItem {
   id: string;
   image: string;
+  images?: string[];
   caption: string;
   alt: string;
 }
