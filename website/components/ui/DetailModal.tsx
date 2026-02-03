@@ -61,14 +61,14 @@ export function DetailModal({
           />
 
           <motion.div
-            className="relative w-full max-w-4xl overflow-hidden rounded-2xl bg-space-black text-text-primary shadow-2xl"
+            className="relative w-full max-w-6xl overflow-hidden rounded-2xl bg-space-black text-text-primary shadow-2xl"
             initial={{ y: 30, opacity: 0, scale: 0.98 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: 20, opacity: 0, scale: 0.98 }}
             transition={{ type: 'spring', stiffness: 220, damping: 24 }}
           >
-            <div className="grid grid-cols-1 md:grid-cols-2">
-              <div className="relative h-72 md:h-full min-h-[300px]">
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+              <div className="relative h-96 lg:h-[600px] min-h-[400px]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeImage}
@@ -83,7 +83,7 @@ export function DetailModal({
                       alt={title}
                       fill
                       className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 50vw"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
                     />
                   </motion.div>
                 </AnimatePresence>
