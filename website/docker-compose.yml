@@ -1,0 +1,49 @@
+services:
+  traefik:
+    image: traefik:v3.0
+    container_name: traefik
+    restart: unless-stopped
+    command:
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+      - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
+      - "--certificatesresolvers.letsencrypt.acme.email=caryoup@163.com"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "letsencrypt:/letsencrypt"
+    networks:
+      - caryoupe
+
+  website:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: caryoupe-website
+    restart: unless-stopped
+    env_file:
+      - .env.local
+    networks:
+      - caryoupe
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.website.rule=Host(`caryoupe.top`) || Host(`www.caryoupe.top`)"
+      - "traefik.http.routers.website.entrypoints=websecure"
+      - "traefik.http.routers.website.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.website.tls.domains[0].main=caryoupe.top"
+      - "traefik.http.routers.website.tls.domains[0].sans=www.caryoupe.top"
+      - "traefik.http.services.website.loadbalancer.server.port=3000"
+
+volumes:
+  letsencrypt:
+
+networks:
+  caryoupe:
+    external: false
