@@ -1,0 +1,11 @@
+.env
+
+# docker images
+docker-images/
+*.tar
+
+# 服务数据目录
+data/
+
+# SSL 证书
+certs/

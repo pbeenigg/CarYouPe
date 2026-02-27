@@ -1,0 +1,21 @@
+caryoupe.top, www.caryoupe.top {
+	tls /etc/caddy/certs/caryoupe.top.pem /etc/caddy/certs/caryoupe.top.key
+	reverse_proxy caryoupe-website:3000
+	encode gzip
+	
+	log {
+		output stdout
+		format console
+	}
+}
+
+git.caryoupe.top {
+	tls /etc/caddy/certs/git.caryoupe.top.pem /etc/caddy/certs/git.caryoupe.top.key
+	reverse_proxy gitea:3000
+	encode gzip
+	
+	log {
+		output stdout
+		format console
+	}
+}
