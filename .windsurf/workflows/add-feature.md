@@ -41,7 +41,6 @@ alembic upgrade head
 1. 在 `frontend_admin/src/app/[locale]/(platform)/admin/xxx/page.tsx` 新增页面
 2. 在 `frontend_admin/src/components/business/` 中添加业务组件 (如需)
 3. 更新翻译文件 `messages/zh-CN.json` 和 `messages/en-US.json`
-4. 如需新 UI 组件: `npx shadcn@latest add <component>`
 
 ### Step 5: (后续) 小程序端 - Client API + UI
 

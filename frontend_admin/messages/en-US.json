@@ -42,6 +42,8 @@
     "wallets": "Wallets",
     "settings": "Settings",
     "logout": "Logout",
+    "collapse": "Collapse",
+    "expand": "Expand",
     "brand": "CarYouPe"
   },
   "Roles": {

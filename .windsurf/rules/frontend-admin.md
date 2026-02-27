@@ -59,7 +59,6 @@ frontend_admin/src/
   - `@/components/ui` → UI 原子组件
   - `@/lib` → 工具库
   - `@/hooks` → Hooks
-- **添加组件**: `npx shadcn@latest add <component-name>`
 - **Table**: 必须包含分页、筛选、排序
 - **Form**: 必须使用 react-hook-form + zod + Shadcn Form 组件
 - **Dialog**: 弹窗必须支持 Esc 关闭

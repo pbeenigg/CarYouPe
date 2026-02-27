@@ -42,6 +42,8 @@
     "wallets": "钱包管理",
     "settings": "设置",
     "logout": "退出登录",
+    "collapse": "收起菜单",
+    "expand": "展开菜单",
     "brand": "CarYouPe"
   },
   "Roles": {

@@ -6,6 +6,13 @@ import api from "@/lib/axios";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { useSidebar } from "@/providers/sidebar-provider";
+import {
   LayoutDashboard,
   Users,
   Package,
@@ -19,6 +26,8 @@ import {
   Store,
   GitBranch,
   Wallet,
+  PanelLeftClose,
+  PanelLeftOpen,
 } from "lucide-react";
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -29,6 +38,7 @@ export function AdminSidebar({ className, role = "admin" }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const t = useTranslations("Sidebar");
+  const { collapsed, toggleCollapsed } = useSidebar();
 
   const handleLogout = async () => {
     try {
@@ -111,54 +121,107 @@ export function AdminSidebar({ className, role = "admin" }: SidebarProps) {
   ];
 
   return (
-    <div
-      className={cn(
-        "pb-12 w-64 border-r bg-sidebar text-sidebar-foreground",
-        className,
-      )}
-    >
-      <div className="space-y-4 py-4">
-        <div className="px-3 py-2">
-          <div className="flex items-center gap-2 px-4 mb-6">
-            <Car className="h-6 w-6 text-primary" />
-            <h2 className="text-xl font-bold tracking-tight">{t("brand")}</h2>
+    <TooltipProvider delayDuration={0}>
+      <div
+        className={cn(
+          "flex h-full flex-col border-r bg-sidebar text-sidebar-foreground transition-all duration-300",
+          collapsed ? "w-16" : "w-64",
+          className,
+        )}
+      >
+        {/* Brand */}
+        <div className="px-3 py-4">
+          <div
+            className={cn(
+              "flex items-center gap-2 px-2 mb-2",
+              collapsed && "justify-center px-0",
+            )}
+          >
+            <Car className="h-6 w-6 shrink-0 text-primary" />
+            {!collapsed && (
+              <h2 className="text-xl font-bold tracking-tight">{t("brand")}</h2>
+            )}
           </div>
+        </div>
+
+        {/* Nav routes - scrollable */}
+        <nav className="flex-1 overflow-y-auto px-3">
           <div className="space-y-1">
             {routes.map((route) => (
-              <Link key={route.href} href={route.href}>
-                <Button
-                  variant={route.active ? "secondary" : "ghost"}
-                  className="w-full justify-start"
-                >
-                  <route.icon className="mr-2 h-4 w-4" />
-                  {route.label}
-                </Button>
-              </Link>
+              <Tooltip key={route.href}>
+                <TooltipTrigger asChild>
+                  <Link href={route.href}>
+                    <Button
+                      variant={route.active ? "secondary" : "ghost"}
+                      className={cn(
+                        "w-full",
+                        collapsed ? "justify-center px-0" : "justify-start",
+                      )}
+                      size={collapsed ? "icon" : "default"}
+                    >
+                      <route.icon
+                        className={cn("h-4 w-4 shrink-0", !collapsed && "mr-2")}
+                      />
+                      {!collapsed && route.label}
+                    </Button>
+                  </Link>
+                </TooltipTrigger>
+                {collapsed && (
+                  <TooltipContent side="right">{route.label}</TooltipContent>
+                )}
+              </Tooltip>
             ))}
           </div>
-        </div>
-        <div className="px-3 py-2">
-          <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
-            {t("settings")}
-          </h2>
-          <div className="space-y-1">
-            <Link href="/admin/settings">
-              <Button variant="ghost" className="w-full justify-start">
-                <Settings className="mr-2 h-4 w-4" />
-                {t("settings")}
+        </nav>
+
+        {/* Bottom actions: icon-only row */}
+        <div
+          className={cn(
+            "mt-auto border-t px-2 py-2 flex items-center gap-1",
+            collapsed ? "flex-col" : "flex-row justify-center",
+          )}
+        >
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link href="/admin/settings">
+                <Button variant="ghost" size="icon">
+                  <Settings className="h-4 w-4" />
+                </Button>
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent side="top">{t("settings")}</TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-red-500 hover:text-red-600 hover:bg-red-100 dark:hover:bg-red-900/20"
+                onClick={handleLogout}
+              >
+                <LogOut className="h-4 w-4" />
               </Button>
-            </Link>
-            <Button
-              variant="ghost"
-              className="w-full justify-start text-red-500 hover:text-red-600 hover:bg-red-100 dark:hover:bg-red-900/20"
-              onClick={handleLogout}
-            >
-              <LogOut className="mr-2 h-4 w-4" />
-              {t("logout")}
-            </Button>
-          </div>
+            </TooltipTrigger>
+            <TooltipContent side="top">{t("logout")}</TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="icon" onClick={toggleCollapsed}>
+                {collapsed ? (
+                  <PanelLeftOpen className="h-4 w-4" />
+                ) : (
+                  <PanelLeftClose className="h-4 w-4" />
+                )}
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="top">
+              {collapsed ? t("expand") : t("collapse")}
+            </TooltipContent>
+          </Tooltip>
         </div>
       </div>
-    </div>
+    </TooltipProvider>
   );
 }

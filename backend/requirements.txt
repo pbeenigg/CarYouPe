@@ -6,6 +6,8 @@ pydantic
 pydantic-settings
 python-jose[cryptography]
 passlib[bcrypt]
+bcrypt==4.0.1
 python-multipart
 psycopg2-binary
-# redis
+fastapi-cache2[redis]
+redis
