@@ -6,3 +6,5 @@ from .distribution import DistributionRelation, CommissionRecord
 from .wallet import Wallet, WalletTransaction
 from .menu import Menu
 from .order import Order, OrderItem
+from .address import Address
+from .store import Store

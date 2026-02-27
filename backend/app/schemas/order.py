@@ -41,6 +41,8 @@ class OrderBase(BaseModel):
     shipping_phone: str          # 收货人电话
     shipping_address: str        # 收货地址
     status: str = "pending"      # 订单状态：pending, paid, shipped, completed, cancelled
+    tracking_no: Optional[str] = None  # 物流单号
+    remark: Optional[str] = None       # 备注
 
 class OrderCreate(OrderBase):
     """
@@ -56,6 +58,8 @@ class OrderUpdate(BaseModel):
     shipping_name: Optional[str] = None  # 收货人姓名
     shipping_phone: Optional[str] = None # 收货人电话
     shipping_address: Optional[str] = None # 收货地址
+    tracking_no: Optional[str] = None    # 物流单号
+    remark: Optional[str] = None         # 备注
 
 class Order(OrderBase):
     """

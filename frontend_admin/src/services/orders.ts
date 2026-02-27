@@ -7,25 +7,34 @@ export interface Order {
   total_amount: number;
   status: string;
   user_id: number;
+  shipping_name: string;
+  shipping_phone: string;
+  shipping_address: string;
+  tracking_no?: string;
+  remark?: string;
   created_at: string;
-  items?: OrderItem[];
-  user?: {
-    id: number;
-    username: string;
-    email: string;
-  };
+  updated_at?: string;
+  items: OrderItem[];
 }
 
 export interface OrderItem {
   id: number;
+  order_id: number;
   product_id: number;
+  product_sku_id?: number;
   product_name: string;
+  product_image?: string;
+  sku_specs?: Record<string, string>;
   quantity: number;
   price: number;
 }
 
 export interface OrderUpdate {
   status?: string;
+  shipping_name?: string;
+  shipping_phone?: string;
+  shipping_address?: string;
+  tracking_no?: string;
   remark?: string;
 }
 
@@ -38,7 +47,7 @@ export const orderService = {
    * @param params 查询参数
    */
   getOrders: (params?: { skip?: number; limit?: number; status?: string }) => {
-    return api.get<Order[]>('/admin/orders/', { params });
+    return api.get<Order[]>("/admin/orders/", { params });
   },
 
   /**

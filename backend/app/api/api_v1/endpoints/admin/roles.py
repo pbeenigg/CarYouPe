@@ -7,8 +7,50 @@ from app import models, schemas, crud
 from app.api import deps
 from app.schemas.response import ResponseSuccess
 from app.core.exceptions import CustomException
+from app.core.permissions import ALL_PERMISSIONS
+from app.models.role import UserRole, Role
 
 router = APIRouter()
+
+
+@router.get("/permissions-codes", response_model=ResponseSuccess)
+def read_permission_codes(
+    current_user: models.User = Depends(deps.get_current_active_superuser),
+) -> Any:
+    """
+    获取所有可用权限码（供角色配置页面使用）
+    Retrieve all available permission codes for role configuration.
+    """
+    return ResponseSuccess(data=ALL_PERMISSIONS)
+
+
+@router.get("/my-permissions", response_model=ResponseSuccess)
+def read_my_permissions(
+    db: Session = Depends(deps.get_db),
+    current_user: models.User = Depends(deps.get_current_user),
+) -> Any:
+    """
+    获取当前用户的权限列表
+    Retrieve current user's permissions.
+    """
+    if crud.user.is_superuser(current_user):
+        return ResponseSuccess(data={"permissions": ["*"], "is_superuser": True})
+
+    user_roles = db.query(UserRole).filter(UserRole.user_id == current_user.id).all()
+    role_ids = [ur.role_id for ur in user_roles]
+    roles = db.query(Role).filter(Role.id.in_(role_ids)).all()
+
+    permissions = set()
+    for role in roles:
+        if role.permissions:
+            for p in role.permissions:
+                permissions.add(p)
+
+    return ResponseSuccess(data={
+        "permissions": sorted(permissions),
+        "is_superuser": False,
+    })
+
 
 @router.get("/", response_model=ResponseSuccess[List[schemas.Role]])
 def read_roles(

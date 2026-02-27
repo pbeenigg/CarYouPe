@@ -1,45 +1,61 @@
 import api from "@/lib/axios";
 
+// SKU 类型
+export interface ProductSKU {
+  id?: number;
+  product_id?: number;
+  specs: Record<string, string>;
+  price: number;
+  stock: number;
+}
+
+// 车型适配类型
+export interface ProductCarCompatibility {
+  id?: number;
+  product_id?: number;
+  car_model_id?: number | null;
+  is_universal: boolean;
+}
+
 // 商品相关类型定义
 export interface Product {
   id: number;
-  name: string;
+  title: string;
+  subtitle?: string;
+  category_id: number;
+  base_price: number;
+  is_on_sale: boolean;
   description?: string;
-  price: number;
-  stock: number;
-  category_id?: number;
-  image_url?: string;
-  is_active: boolean;
-  category?: {
-    id: number;
-    name: string;
-  };
+  main_image?: string;
+  detail_images?: string[];
+  skus: ProductSKU[];
+  car_compatibility: ProductCarCompatibility[];
 }
 
 export interface ProductCreate {
-  name: string;
+  title: string;
+  subtitle?: string;
+  category_id: number;
+  base_price: number;
+  is_on_sale?: boolean;
   description?: string;
-  price: number;
-  stock: number;
-  category_id?: number;
-  image_url?: string;
-  is_active?: boolean;
+  main_image?: string;
+  detail_images?: string[];
+  skus?: ProductSKU[];
+  car_compatibility?: ProductCarCompatibility[];
 }
 
 export interface ProductUpdate {
-  name?: string;
-  description?: string;
-  price?: number;
-  stock?: number;
+  title?: string;
+  subtitle?: string;
   category_id?: number;
-  image_url?: string;
-  is_active?: boolean;
-}
-
-export interface Category {
-  id: number;
-  name: string;
+  base_price?: number;
+  is_on_sale?: boolean;
   description?: string;
+  main_image?: string;
+  detail_images?: string[];
+  skus?: ProductSKU[];
+  car_compatibility?: ProductCarCompatibility[];
 }
 
 /**
@@ -51,7 +67,7 @@ export const productService = {
    * @param params 查询参数
    */
   getProducts: (params?: { skip?: number; limit?: number }) => {
-    return api.get<Product[]>('/admin/products/', { params });
+    return api.get<Product[]>("/admin/products/", { params });
   },
 
   /**
@@ -67,7 +83,7 @@ export const productService = {
    * @param data 商品数据
    */
   createProduct: (data: ProductCreate) => {
-    return api.post<Product>('/admin/products/', data);
+    return api.post<Product>("/admin/products/", data);
   },
 
   /**
@@ -88,21 +104,18 @@ export const productService = {
   },
 
   /**
-   * 获取商品分类列表
-   */
-  getCategories: () => {
-    return api.get<Category[]>('/admin/categories/');
-  },
-  
-  /**
    * 上传文件
    * @param formData 包含文件的 FormData
    */
   uploadFile: (formData: FormData) => {
-    return api.post<{ filename: string; url: string }>('/common/upload', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
+    return api.post<{ filename: string; url: string }>(
+      "/common/upload",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       },
-    });
+    );
   },
 };

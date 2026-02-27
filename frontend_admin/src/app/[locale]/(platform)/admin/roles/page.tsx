@@ -1,12 +1,10 @@
-"use client"
-
-import { Header } from "@/components/layout/admin-header";
+"use client";
 
 import { useEffect, useState } from "react";
-import { useTranslations } from 'next-intl';
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
+import { useTranslations } from "next-intl";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 import { useRequest } from "@/hooks/use-request";
 import { roleService, type Role } from "@/services/roles";
 
@@ -28,7 +26,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -36,21 +34,21 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Plus, Pencil, Trash2, Loader2 } from "lucide-react";
 
 const roleSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
   description: z.string().optional(),
-})
+});
 
 type RoleFormValues = z.infer<typeof roleSchema>;
 
 export default function RolesPage() {
-  const t = useTranslations('Roles');
-  const tCommon = useTranslations('Common');
+  const t = useTranslations("Roles");
+  const tCommon = useTranslations("Common");
   const [roles, setRoles] = useState<Role[]>([]);
   const [open, setOpen] = useState(false);
   const [editingRole, setEditingRole] = useState<Role | null>(null);
@@ -61,9 +59,9 @@ export default function RolesPage() {
       return await roleService.getRoles();
     },
     {
-      onSuccess: (data) => setRoles(data),
+      onSuccess: (data) => setRoles(data as Role[]),
       onError: (err) => console.error("Failed to fetch roles:", err),
-    }
+    },
   );
 
   // 2. 提交表单
@@ -80,8 +78,10 @@ export default function RolesPage() {
         setOpen(false);
         fetchRoles();
       },
-      successMessage: editingRole ? tCommon('updateSuccess') : tCommon('createSuccess'),
-    }
+      successMessage: editingRole
+        ? tCommon("updateSuccess")
+        : tCommon("createSuccess"),
+    },
   );
 
   // 3. 删除角色
@@ -91,8 +91,8 @@ export default function RolesPage() {
     },
     {
       onSuccess: () => fetchRoles(),
-      successMessage: tCommon('deleteSuccess'),
-    }
+      successMessage: tCommon("deleteSuccess"),
+    },
   );
 
   const form = useForm<RoleFormValues>({
@@ -101,7 +101,7 @@ export default function RolesPage() {
       name: "",
       description: "",
     },
-  })
+  });
 
   useEffect(() => {
     fetchRoles();
@@ -126,14 +126,14 @@ export default function RolesPage() {
   };
 
   const handleDelete = (id: number) => {
-    if (confirm(tCommon('confirmDelete'))) {
+    if (confirm(tCommon("confirmDelete"))) {
       deleteRole(id);
     }
   };
 
   const getDisplayDescription = (description?: string) => {
-    if (description && description.startsWith('Roles.desc.')) {
-        return t(description.replace('Roles.', ''));
+    if (description && description.startsWith("Roles.desc.")) {
+      return t(description.replace("Roles.", ""));
     }
     return description || "";
   };
@@ -141,32 +141,42 @@ export default function RolesPage() {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <h2 className="text-3xl font-bold tracking-tight">{t('title')}</h2>
-        <Dialog open={open} onOpenChange={(val) => {
-          setOpen(val);
-          if (!val) setEditingRole(null);
-        }}>
+        <h2 className="text-3xl font-bold tracking-tight">{t("title")}</h2>
+        <Dialog
+          open={open}
+          onOpenChange={(val) => {
+            setOpen(val);
+            if (!val) setEditingRole(null);
+          }}
+        >
           <DialogTrigger asChild>
             <Button onClick={() => setEditingRole(null)}>
               <Plus className="mr-2 h-4 w-4" />
-              {t('addRole')}
+              {t("addRole")}
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
-              <DialogTitle>{editingRole ? t('editTitle') : t('createTitle')}</DialogTitle>
+              <DialogTitle>
+                {editingRole ? t("editTitle") : t("createTitle")}
+              </DialogTitle>
               <DialogDescription>
-                {editingRole ? "Edit role details below." : "Enter details for the new role."}
+                {editingRole
+                  ? "Edit role details below."
+                  : "Enter details for the new role."}
               </DialogDescription>
             </DialogHeader>
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-4"
+              >
                 <FormField
                   control={form.control}
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t('name')}</FormLabel>
+                      <FormLabel>{t("name")}</FormLabel>
                       <FormControl>
                         <Input placeholder="admin" {...field} />
                       </FormControl>
@@ -179,9 +189,9 @@ export default function RolesPage() {
                   name="description"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t('description')}</FormLabel>
+                      <FormLabel>{t("description")}</FormLabel>
                       <FormControl>
-                        <Textarea placeholder={t('description')} {...field} />
+                        <Textarea placeholder={t("description")} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -189,8 +199,10 @@ export default function RolesPage() {
                 />
                 <DialogFooter>
                   <Button type="submit" disabled={submitting}>
-                    {submitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                    {tCommon('submit')}
+                    {submitting && (
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    )}
+                    {tCommon("submit")}
                   </Button>
                 </DialogFooter>
               </form>
@@ -201,24 +213,26 @@ export default function RolesPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>{t('title')}</CardTitle>
+          <CardTitle>{t("title")}</CardTitle>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>ID</TableHead>
-                <TableHead>{t('name')}</TableHead>
-                <TableHead>{t('description')}</TableHead>
-                <TableHead>{t('permissions')}</TableHead>
-                <TableHead className="text-right">{tCommon('actions')}</TableHead>
+                <TableHead>{t("name")}</TableHead>
+                <TableHead>{t("description")}</TableHead>
+                <TableHead>{t("permissions")}</TableHead>
+                <TableHead className="text-right">
+                  {tCommon("actions")}
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {loading ? (
                 <TableRow>
                   <TableCell colSpan={5} className="text-center">
-                    {tCommon('loading')}
+                    {tCommon("loading")}
                   </TableCell>
                 </TableRow>
               ) : roles.length === 0 ? (
@@ -232,20 +246,25 @@ export default function RolesPage() {
                   <TableRow key={role.id}>
                     <TableCell>{role.id}</TableCell>
                     <TableCell className="font-medium">{role.name}</TableCell>
-                    <TableCell>{getDisplayDescription(role.description)}</TableCell>
+                    <TableCell>
+                      {getDisplayDescription(role.description)}
+                    </TableCell>
                     <TableCell>
                       <div className="flex flex-wrap gap-1">
                         {role.permissions?.map((perm, index) => (
-                          <span key={index} className="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">
+                          <span
+                            key={index}
+                            className="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10"
+                          >
                             {perm}
                           </span>
                         ))}
                       </div>
                     </TableCell>
                     <TableCell className="text-right">
-                      <Button 
-                        variant="ghost" 
-                        size="icon" 
+                      <Button
+                        variant="ghost"
+                        size="icon"
                         onClick={() => {
                           setEditingRole(role);
                           setOpen(true);
@@ -253,9 +272,9 @@ export default function RolesPage() {
                       >
                         <Pencil className="h-4 w-4" />
                       </Button>
-                      <Button 
-                        variant="ghost" 
-                        size="icon" 
+                      <Button
+                        variant="ghost"
+                        size="icon"
                         className="text-red-600"
                         onClick={() => handleDelete(role.id)}
                       >

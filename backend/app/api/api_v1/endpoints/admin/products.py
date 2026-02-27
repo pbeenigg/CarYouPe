@@ -23,6 +23,25 @@ def read_products(
     products = crud.product.get_multi(db, skip=skip, limit=limit)
     return ResponseSuccess(data=products)
 
+@router.get("/{product_id}", response_model=ResponseSuccess[schemas.Product])
+def read_product(
+    *,
+    db: Session = Depends(deps.get_db),
+    product_id: int,
+    current_user: models.User = Depends(deps.get_current_active_superuser),
+) -> Any:
+    """
+    获取单个商品详情
+    Retrieve a single product by ID.
+    """
+    product = crud.product.get(db, id=product_id)
+    if not product:
+        raise CustomException(
+            code=404,
+            message="The product with this id does not exist in the system",
+        )
+    return ResponseSuccess(data=product)
+
 @router.post("/", response_model=ResponseSuccess[schemas.Product])
 @idempotent(expire=60)
 async def create_product(
@@ -65,7 +84,7 @@ def update_product(
             code=404,
             message="The product with this id does not exist in the system", # 该ID的商品不存在
         )
-    product = crud.product.update(db, db_obj=product, obj_in=product_in)
+    product = crud.product.update_with_relations(db, db_obj=product, obj_in=product_in)
     return ResponseSuccess(data=product)
 
 @router.delete("/{product_id}", response_model=ResponseSuccess[schemas.Product])

@@ -1,14 +1,12 @@
-"use client"
+"use client";
 
 import { useEffect, useState, Fragment } from "react";
-import { useTranslations } from 'next-intl';
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
+import { useTranslations } from "next-intl";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 import { useRequest } from "@/hooks/use-request";
 import { menuService, type Menu } from "@/services/menus";
-import { Header } from "@/components/layout/admin-header";
-
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -27,7 +25,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -35,23 +33,30 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Plus, Pencil, Trash2, Loader2, ChevronRight, ChevronDown } from "lucide-react";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import {
+  Plus,
+  Pencil,
+  Trash2,
+  Loader2,
+  ChevronRight,
+  ChevronDown,
+} from "lucide-react";
 
 const menuSchema = z.object({
   title: z.string().min(2, { message: "Title must be at least 2 characters" }),
   path: z.string().min(1, { message: "Path is required" }),
   icon: z.string().optional(),
   order: z.coerce.number(),
-})
+});
 
 type MenuFormValues = z.infer<typeof menuSchema>;
 
 export default function MenusPage() {
-  const t = useTranslations('Menus');
-  const tCommon = useTranslations('Common');
-  const tSidebar = useTranslations('Sidebar');
+  const t = useTranslations("Menus");
+  const tCommon = useTranslations("Common");
+  const tSidebar = useTranslations("Sidebar");
   const [menus, setMenus] = useState<Menu[]>([]);
   const [open, setOpen] = useState(false);
   const [editingMenu, setEditingMenu] = useState<Menu | null>(null);
@@ -62,9 +67,9 @@ export default function MenusPage() {
       return await menuService.getMenus();
     },
     {
-      onSuccess: (data) => setMenus(data),
+      onSuccess: (data) => setMenus(data as Menu[]),
       onError: (err) => console.error("Failed to fetch menus:", err),
-    }
+    },
   );
 
   // 2. 提交表单 (创建/更新)
@@ -90,8 +95,10 @@ export default function MenusPage() {
         setOpen(false);
         fetchMenus();
       },
-      successMessage: editingMenu ? "Menu updated successfully" : "Menu created successfully",
-    }
+      successMessage: editingMenu
+        ? "Menu updated successfully"
+        : "Menu created successfully",
+    },
   );
 
   // 3. 删除菜单
@@ -102,7 +109,7 @@ export default function MenusPage() {
     {
       onSuccess: () => fetchMenus(),
       successMessage: "Menu deleted successfully",
-    }
+    },
   );
 
   const form = useForm<any>({
@@ -113,7 +120,7 @@ export default function MenusPage() {
       icon: "",
       order: 0,
     },
-  })
+  });
 
   useEffect(() => {
     fetchMenus();
@@ -143,15 +150,15 @@ export default function MenusPage() {
   };
 
   const handleDelete = (id: number) => {
-    if (confirm(tCommon('confirmDelete'))) {
+    if (confirm(tCommon("confirmDelete"))) {
       deleteMenu(id);
     }
   };
 
   const getDisplayTitle = (title: string) => {
-    if (title.startsWith('Sidebar.')) {
-        // @ts-ignore
-        return tSidebar(title.replace('Sidebar.', ''));
+    if (title.startsWith("Sidebar.")) {
+      // @ts-ignore
+      return tSidebar(title.replace("Sidebar.", ""));
     }
     return title;
   };
@@ -173,9 +180,9 @@ export default function MenusPage() {
           {/* @ts-ignore */}
           <TableCell>{menu.sort || menu.order}</TableCell>
           <TableCell className="text-right">
-            <Button 
-              variant="ghost" 
-              size="icon" 
+            <Button
+              variant="ghost"
+              size="icon"
               onClick={() => {
                 setEditingMenu(menu);
                 setOpen(true);
@@ -183,9 +190,9 @@ export default function MenusPage() {
             >
               <Pencil className="h-4 w-4" />
             </Button>
-            <Button 
-              variant="ghost" 
-              size="icon" 
+            <Button
+              variant="ghost"
+              size="icon"
               className="text-red-600"
               onClick={() => handleDelete(menu.id)}
             >
@@ -201,32 +208,42 @@ export default function MenusPage() {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <h2 className="text-3xl font-bold tracking-tight">{t('title')}</h2>
-        <Dialog open={open} onOpenChange={(val) => {
-          setOpen(val);
-          if (!val) setEditingMenu(null);
-        }}>
+        <h2 className="text-3xl font-bold tracking-tight">{t("title")}</h2>
+        <Dialog
+          open={open}
+          onOpenChange={(val) => {
+            setOpen(val);
+            if (!val) setEditingMenu(null);
+          }}
+        >
           <DialogTrigger asChild>
             <Button onClick={() => setEditingMenu(null)}>
               <Plus className="mr-2 h-4 w-4" />
-              {t('addMenu')}
+              {t("addMenu")}
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
-              <DialogTitle>{editingMenu ? t('editTitle') : t('createTitle')}</DialogTitle>
+              <DialogTitle>
+                {editingMenu ? t("editTitle") : t("createTitle")}
+              </DialogTitle>
               <DialogDescription>
-                {editingMenu ? "Edit menu details below." : "Enter details for the new menu."}
+                {editingMenu
+                  ? "Edit menu details below."
+                  : "Enter details for the new menu."}
               </DialogDescription>
             </DialogHeader>
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-4"
+              >
                 <FormField
                   control={form.control}
                   name="title"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t('menuTitle')}</FormLabel>
+                      <FormLabel>{t("menuTitle")}</FormLabel>
                       <FormControl>
                         <Input placeholder="Dashboard" {...field} />
                       </FormControl>
@@ -239,7 +256,7 @@ export default function MenusPage() {
                   name="path"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t('path')}</FormLabel>
+                      <FormLabel>{t("path")}</FormLabel>
                       <FormControl>
                         <Input placeholder="/admin/dashboard" {...field} />
                       </FormControl>
@@ -248,37 +265,39 @@ export default function MenusPage() {
                   )}
                 />
                 <div className="grid grid-cols-2 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="icon"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>{t('icon')}</FormLabel>
-                          <FormControl>
-                            <Input placeholder="LayoutDashboard" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="order"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>{t('order')}</FormLabel>
-                          <FormControl>
-                            <Input type="number" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                  <FormField
+                    control={form.control}
+                    name="icon"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{t("icon")}</FormLabel>
+                        <FormControl>
+                          <Input placeholder="LayoutDashboard" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="order"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{t("order")}</FormLabel>
+                        <FormControl>
+                          <Input type="number" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
                 <DialogFooter>
                   <Button type="submit" disabled={submitting}>
-                    {submitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                    {tCommon('submit')}
+                    {submitting && (
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    )}
+                    {tCommon("submit")}
                   </Button>
                 </DialogFooter>
               </form>
@@ -289,24 +308,26 @@ export default function MenusPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>{t('title')}</CardTitle>
+          <CardTitle>{t("title")}</CardTitle>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>{t('menuTitle')}</TableHead>
-                <TableHead>{t('path')}</TableHead>
-                <TableHead>{t('icon')}</TableHead>
-                <TableHead>{t('order')}</TableHead>
-                <TableHead className="text-right">{tCommon('actions')}</TableHead>
+                <TableHead>{t("menuTitle")}</TableHead>
+                <TableHead>{t("path")}</TableHead>
+                <TableHead>{t("icon")}</TableHead>
+                <TableHead>{t("order")}</TableHead>
+                <TableHead className="text-right">
+                  {tCommon("actions")}
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {loading ? (
                 <TableRow>
                   <TableCell colSpan={5} className="text-center">
-                    {tCommon('loading')}
+                    {tCommon("loading")}
                   </TableCell>
                 </TableRow>
               ) : menus.length === 0 ? (

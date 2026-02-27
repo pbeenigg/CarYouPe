@@ -27,6 +27,8 @@ class Order(Base):
     shipping_name = Column(String(100))    # 收货人姓名
     shipping_phone = Column(String(20))    # 收货人电话
     shipping_address = Column(String(500)) # 收货地址
+    tracking_no = Column(String(100), nullable=True) # 物流单号
+    remark = Column(String(500), nullable=True)      # 备注
     
     created_at = Column(DateTime(timezone=True), server_default=func.now()) # 创建时间
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())       # 更新时间

@@ -48,6 +48,25 @@ async def create_user(
     user = crud.user.create(db, obj_in=user_in)
     return ResponseSuccess(data=user)
 
+@router.get("/{user_id}", response_model=ResponseSuccess[schemas.User])
+def read_user(
+    *,
+    db: Session = Depends(deps.get_db),
+    user_id: int,
+    current_user: models.User = Depends(deps.get_current_active_superuser),
+) -> Any:
+    """
+    获取单个用户详情
+    Retrieve a single user by ID.
+    """
+    user = crud.user.get(db, id=user_id)
+    if not user:
+        raise CustomException(
+            code=404,
+            message="The user with this id does not exist in the system",
+        )
+    return ResponseSuccess(data=user)
+
 @router.put("/me", response_model=ResponseSuccess[schemas.User])
 def update_user_me(
     *,
@@ -77,6 +96,31 @@ def update_user_me(
         user_in.phone = phone
         
     user = crud.user.update(db, db_obj=current_user, obj_in=user_in)
+    return ResponseSuccess(data=user)
+
+@router.delete("/{user_id}", response_model=ResponseSuccess[schemas.User])
+def delete_user(
+    *,
+    db: Session = Depends(deps.get_db),
+    user_id: int,
+    current_user: models.User = Depends(deps.get_current_active_superuser),
+) -> Any:
+    """
+    删除用户
+    Delete a user.
+    """
+    user = crud.user.get(db, id=user_id)
+    if not user:
+        raise CustomException(
+            code=404,
+            message="The user with this id does not exist in the system",
+        )
+    if user.id == current_user.id:
+        raise CustomException(
+            code=400,
+            message="Cannot delete yourself",
+        )
+    user = crud.user.remove(db, id=user_id)
     return ResponseSuccess(data=user)
 
 @router.put("/{user_id}", response_model=ResponseSuccess[schemas.User])
