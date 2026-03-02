@@ -10,8 +10,8 @@ services:
     expose:
       - "3000"
     networks:
-      - infra_caryoupe
+      - infra_lyz
 
 networks:
-  infra_caryoupe:
+  infra_lyz:
     external: true

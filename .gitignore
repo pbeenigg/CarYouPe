@@ -16,8 +16,5 @@ temp/
 .trae/
 
 # Local Env
-.env
-.env.*
-!.env.example
 .github/instructions/codacy.instructions.md
 .codacy/
