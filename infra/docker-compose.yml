@@ -1,26 +1,26 @@
 services:
-  caddy:
-    image: caddy:2.11.1
-    container_name: caddy
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-      - "443:443/udp"
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - ./data/caddy/data:/data
-      - ./data/caddy/config:/config
-      - ./certs:/etc/caddy/certs:ro
-    networks:
-      - baota_net
-    depends_on:
-      - gitea
-    healthcheck:
-      test: ["CMD-SHELL", "caddy version"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+  # caddy:
+  #   image: caddy:2.11.1
+  #   container_name: caddy
+  #   restart: unless-stopped
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #     - "443:443/udp"
+  #   volumes:
+  #     - ./Caddyfile:/etc/caddy/Caddyfile
+  #     - ./data/caddy/data:/data
+  #     - ./data/caddy/config:/config
+  #     - ./certs:/etc/caddy/certs:ro
+  #   networks:
+  #     - baota_net
+  #   depends_on:
+  #     - gitea
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "caddy version"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
 
   postgres:
     image: postgres:14.22

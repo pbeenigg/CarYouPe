@@ -8,8 +8,8 @@ services:
     restart: unless-stopped
     env_file:
       - .env
-    expose:
-      - "8080:3000"
+    ports:
+      - "${WEBSITE_PORT:-8080}:3000"
     networks:
       - baota_net
 
