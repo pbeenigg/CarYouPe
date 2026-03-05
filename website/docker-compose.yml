@@ -1,3 +1,4 @@
+# VERSION 用于镜像标签，需在同目录 .env 中设置，或 export VERSION=1.0.0（.env.local 仅注入容器，不参与此处替换）
 services:
   website:
     image: caryoupe-website:${VERSION:-latest}
@@ -6,12 +7,12 @@ services:
     container_name: caryoupe-website
     restart: unless-stopped
     env_file:
-      - .env.local
+      - .env
     expose:
-      - "3000"
+      - "8080:3000"
     networks:
-      - infra_lyz
+      - baota_net
 
 networks:
-  infra_lyz:
+  baota_net:
     external: true

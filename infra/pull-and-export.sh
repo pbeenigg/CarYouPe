@@ -10,10 +10,11 @@ PLATFORM="linux/amd64"
 
 # 定义所有需要的镜像（格式: "名称:镜像"）
 IMAGES=(
-    "caddy:caddy:2-alpine"
-    "postgres:postgres:14-alpine"
-    "redis:redis:7-alpine"
+    "caddy:caddy:2.11.1"
+    "postgres:postgres:14.22"
+    "redis:redis:8.6"
     "gitea:gitea/gitea:1.25.4"
+    "portainer:6053537/portainer-ce:2.33.6"
 )
 
 echo "=========================================="
