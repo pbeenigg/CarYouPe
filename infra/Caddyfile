@@ -1,5 +1,4 @@
-caryoupe.top, www.caryoupe.top {
-	tls /etc/caddy/certs/caryoupe.top.pem /etc/caddy/certs/caryoupe.top.key
+caryoupe.vip, www.caryoupe.vip {
 	reverse_proxy caryoupe-website:3000
 	encode gzip
 	
@@ -9,8 +8,7 @@ caryoupe.top, www.caryoupe.top {
 	}
 }
 
-git.caryoupe.top {
-	tls /etc/caddy/certs/git.caryoupe.top.pem /etc/caddy/certs/git.caryoupe.top.key
+git.caryoupe.vip {
 	reverse_proxy gitea:3000
 	encode gzip
 	
